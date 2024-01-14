@@ -1,10 +1,14 @@
 package com.techblog.entities;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+
+import java.util.*;
 
 @Entity
 
@@ -25,18 +29,22 @@ public class User {
 
 	private String about;
 
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+	private List<Post> posts;
+
 	public User() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public User(int uId, String name, String email, String password, String about) {
+	public User(int uId, String name, String email, String password, String about, List<Post> posts) {
 		super();
 		this.uId = uId;
 		this.name = name;
 		this.email = email;
 		this.password = password;
 		this.about = about;
+		this.posts = posts;
 	}
 
 	public int getuId() {
@@ -77,6 +85,14 @@ public class User {
 
 	public void setAbout(String about) {
 		this.about = about;
+	}
+
+	public List<Post> getPosts() {
+		return posts;
+	}
+
+	public void setPosts(List<Post> posts) {
+		this.posts = posts;
 	}
 
 }

@@ -1,5 +1,7 @@
 package com.techblog.payload;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
@@ -36,6 +38,10 @@ public class UserDto {
 		this.about = about;
 	}
 
+//	public UserDto(BCryptPasswordEncoder bCryptPasswordEncoder, String rawPassword) {
+//		this.password = bCryptPasswordEncoder.encode(rawPassword);
+//	}
+
 	public int getuId() {
 		return uId;
 	}
@@ -64,8 +70,8 @@ public class UserDto {
 		return password;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setPassword(BCryptPasswordEncoder bCryptPasswordEncoder, String rawPassword) {
+		this.password = bCryptPasswordEncoder.encode(rawPassword);
 	}
 
 	public String getAbout() {

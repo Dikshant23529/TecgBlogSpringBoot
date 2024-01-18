@@ -75,7 +75,12 @@ public class PostServiceImpl implements PostServices {
 	public List<PostDto> getAllPosts() {
 
 		List<Post> Posts = this.postRepository.findAll();
-
+//		int pageSize = 10;
+//		int totalPage = 10;
+//		this.postRepository.findAll(pageSize, totalPage);
+//
+//		
+		
 		List<PostDto> postsDtos = Posts.stream().map((post) -> this.modelMapper.map(post, PostDto.class))
 				.collect(Collectors.toList());
 
